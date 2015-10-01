@@ -1,4 +1,4 @@
-import json, csv, nflgame, nfldb, urllib, scrapy, time
+import json, csv, nflgame, urllib, scrapy, time
 from scrapy.crawler import CrawlerProcess
 from scrapy.xlib.pydispatch import dispatcher
 from scrapy.selector import Selector
@@ -18,9 +18,6 @@ dk_file = urllib.URLopener()
 dk_file.retrieve('https://www.draftkings.com/lineup/getavailableplayerscsv?contestTypeId=21&draftGroupId=7315', 'week4/DKSalaries.csv')
 
 csvfile = open('week4/DKSalaries.csv', 'rb')
-
-db = nfldb.connect()
-q = nfldb.Query(db)
 
 def scrape_fantasy_pros():
     players = {
