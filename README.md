@@ -15,7 +15,10 @@ Python scripts to gather and compile DFS data into usable spreadsheets.
   ```
 
 # What does it do?
-* **main.py** - Scrapes DraftKings player data and combines it with NFL stats, vegas spreads, and FantasyPros.com projections to generate CSVs by position. It is not yet optimized for speed so may take a long time. 
+* **main.py** - Scrapes DraftKings player data and combines it with NFL stats, vegas spreads, and FantasyPros.com projections to generate CSVs by position. It is not yet optimized for speed so may take a long time.
 
   > *__Note:__* Currently hardcoded to use week 4 Draft Kings player data. Vegas odds and Fantasy Pros projections are scraped for whataver data is currently live on those sites.
 * **qb_analysis.py** - Gets NFL stats for qb passes. Currently counts passes by distance and side of field, but can be expanded to be much more powerful. Will be implemented in main app to help predict things such as receiver targets by position and where runningbacks usually run.
+
+# Example CSVs
+Check out data generated from week three by opening the example CSVs in Excel. Take not how we can sort by value, which is essential in building a winning DFS lineup.
