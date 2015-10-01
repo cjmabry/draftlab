@@ -1,0 +1,43 @@
+#!/Users/chrismabry/Desktop/nfl/venv/bin/python
+
+import argparse
+
+import nfldb.update
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Updates the nfldb database. It may be run at any '
+                    'frequency, or it may be run in the background with '
+                    '--background.',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    aa = parser.add_argument
+    aa('--interval', type=int, default=None,
+       help='When set, nfldb-update will check for active games and update '
+            'the database every N seconds, where N is the interval given. '
+            'You should NOT specify an interval smaller than 15 seconds, '
+            'since NFL.com\'s JSON feed is updated approximately every '
+            '15 seconds.')
+    aa('--player-interval', type=int, default=(60 * 60 * 12),
+       help='The number of seconds between player meta data updates. A longer '
+            'interval is needed since meta data does not change frequently '
+            'and because each update requires a few dozen HTTP requests to '
+            'NFL.com.')
+    aa('--update-schedules', action='store_true',
+       help='When set, ALL game schedules are refreshed from the data in '
+            'nflgame. (In normal operation, only the current week\'s schedule '
+            'is refreshed.)')
+    aa('--batch-size', type=int, default=5,
+       help='The number of games to batch before sending data to the '
+            'database. In normal operation, this setting will not have much '
+            'effect and so should be kept low (to keep memory requirements '
+            'low). It is most useful when updating a large amount of data.'
+            'e.g., A batch size of 150 seems to work well when building the '
+            'database from scratch.')
+    aa('--simulate', nargs='+', default=None)
+    args = parser.parse_args()
+
+    nfldb.update.run(**vars(args))
+    # nfldb.update.run(player_interval=args.player_interval, 
+                     # interval=args.interval, 
+                     # update_schedules=args.update_schedules, 
+                     # batch_size=args.batch_size) 
